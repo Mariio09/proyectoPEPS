@@ -1,11 +1,9 @@
 import os
 from flask import Flask
-from variables import cargarvariables
 
 app = Flask(__name__)
 
 app.config.from_pyfile('settings.py')
-cargarvariables()
   
 import rutas_inicio
 
