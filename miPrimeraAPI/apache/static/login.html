@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+    <script src="./js/login.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -28,7 +29,8 @@
                 <input type="password" id="pass">
             </div>
 
-            <input type="button" onclick="tryLogin()" value="Ingresar">
+            <input type="button" onclick="login()" value="Ingresar">
+            <p style="color: red;" class="hidden" id="error">Error al iniciar sesion</p>
         </div>
     </div>
 </body>
