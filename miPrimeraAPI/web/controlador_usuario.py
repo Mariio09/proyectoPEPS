@@ -2,33 +2,60 @@ from __future__ import print_function
 from bd import obtener_conexion
 import sys
 
-def insertar_usuario(nombre, descripcion, precio,foto):
+# def insertar_usuario(nombre, descripcion, precio,foto):
+#     try:
+#         conexion = obtener_conexion()
+#         with conexion.cursor() as cursor:
+#             cursor.execute("INSERT INTO juegos(nombre, descripcion, precio,foto) VALUES (%s, %s, %s,%s)",
+#                        (nombre, descripcion, precio,foto))
+#             if cursor.rowcount == 1:
+#                 ret={"status": "OK" }
+#             else:
+#                 ret = {"status": "Failure" }
+#         code=200
+#         conexion.commit()
+#         conexion.close()
+#     except:
+#         print("Excepcion al insertar un juego", file=sys.stdout)
+#         ret = {"status": "Failure" }
+#         code=500
+#     return ret,code
+
+
+def obtener_usuario_user(id,clave):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO juegos(nombre, descripcion, precio,foto) VALUES (%s, %s, %s,%s)",
-                       (nombre, descripcion, precio,foto))
-            if cursor.rowcount == 1:
-                ret={"status": "OK" }
-            else:
-                ret = {"status": "Failure" }
-        code=200
-        conexion.commit()
+            cursor.execute("SELECT * from usuarios where usuario== %s",(id))
+            user = cursor.fetchone()
+            if user is not None:
+                userjson = userToJson(user)
         conexion.close()
+        code=200
+        if userjson.clave == clave:
+            return userjson.perfil,code
+        else:
+            return 'FORBIDDEN',403
     except:
-        print("Excepcion al insertar un juego", file=sys.stdout)
-        ret = {"status": "Failure" }
+        print("Excepcion al recuperar un usuario", file=sys.stdout)
         code=500
-    return ret,code
 
-def convertir_juego_a_json(juego):
+
+def userToJson(user):
     d = {}
-    d['id'] = juego[0]
-    d['nombre'] = juego[1]
-    d['descripcion'] = juego[2]
-    d['precio'] = juego[3]
-    d['foto'] = juego[4]
+    d['usuario'] = user[0]
+    d['clave'] = user[1]
+    d['perfil'] = user[2]
     return d
+
+
+
+
+
+
+
+
+
 
 def obtener_juegos():
     try:
@@ -47,24 +74,6 @@ def obtener_juegos():
         juegosjson=[]
         code=500
     return juegosjson,code
-
-def obtener_juego_por_id(id):
-    juegojson = {}
-    try:
-        conexion = obtener_conexion()
-        with conexion.cursor() as cursor:
-            #cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM juegos WHERE id = %s", (id,))
-            cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM juegos WHERE id =" + id)
-            juego = cursor.fetchone()
-            if juego is not None:
-                juegojson = convertir_juego_a_json(juego)
-        conexion.close()
-        code=200
-    except:
-        print("Excepcion al recuperar un juego", file=sys.stdout)
-        code=500
-    return juegojson,code
-
 
 def eliminar_juego(id):
     try:

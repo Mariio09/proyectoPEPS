@@ -23,7 +23,7 @@ def login():
             if usuario is None:
                 ret = {"status": "ERROR","mensaje":"Usuario/clave erroneo" }
             else:
-                ret = {"status": "OK" }
+                ret = {"status": "OK", "type":usuario[0], "username":username }
                 session["usuario"]=username
                 session["perfil"]=usuario[0]
             code=200
@@ -34,7 +34,7 @@ def login():
     else:
         ret={"status":"Bad request"}
         code=401
-    return json.dumps(ret), code
+    return ret, code
 
 @app.route("/registro",methods=['POST'])
 def registro():
