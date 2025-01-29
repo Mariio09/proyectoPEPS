@@ -1,8 +1,11 @@
 
 window.onload = async function(){
-    console.log('asdasda')
-    lista = await getCoches();
-    console.log(lista);
+    try {
+      lista = await getCoches();
+    } catch (error) {
+      console.log(error)
+    }
+    pintarCoches(JSON.parse(lista));
 }
 
 async function getCoches(){
@@ -10,12 +13,19 @@ async function getCoches(){
 
     }
     
-    let response = await fetch("http://localhost:9094/coches", { 
+    let response = await fetch("/api/coches", { 
       method: "GET",
       headers: headersList
     });
     
     let data = await response.text();
-    console.log(data);
+
+    return data;
     
+}
+
+function pintarCoches(lista){
+  lista.forEach(coche => {
+    document.getElementById('containerCoches').innerHTML += "<div class='fotoCoche' ><img style='width:90%' src='./assets/"+ coche.foto+"' /><p>"+coche.marca+" "+coche.modelo+"</p></div>"
+  });
 }
