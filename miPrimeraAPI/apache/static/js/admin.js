@@ -1,15 +1,14 @@
 window.onload = async function() {
     try {
         let lista = await getCoches();
-        pintarCoches(JSON.parse(lista));  // Convierte el string a objeto JSON
+        pintarCoches(JSON.parse(lista));
     } catch (error) {
         console.log("Error al obtener los coches:", error);
     }
 }
 
-// Función para obtener los coches desde la API
 async function getCoches() {
-    let headersList = {}; // Aquí podrías agregar cabeceras si es necesario
+    let headersList = {}; 
 
     let response = await fetch("/api/coches", { 
         method: "GET",
@@ -20,30 +19,50 @@ async function getCoches() {
         throw new Error("No se pudo obtener la lista de coches.");
     }
 
-    let data = await response.text(); // Obtiene la respuesta como texto
+    let data = await response.text();
 
-    return data; // Retorna los datos
+    return data; 
 }
 
-// Función para pintar los coches en la tabla
 function pintarCoches(lista) {
-    let tbody = document.getElementById("tablaCoches"); // Seleccionamos el tbody
+    let tbody = document.getElementById("tablaCoches");
 
     lista.forEach(coche => {
-        // Creamos una fila de la tabla para cada coche
         let fila = `
-            <tr>
+            <tr id="fila-${coche.matricula}">
                 <td>${coche.matricula}</td>
                 <td>${coche.marca}</td>
                 <td>${coche.modelo}</td>
                 <td>${coche.descripcion}</td>
                 <td>${coche.precio}€</td>
                 <td><img src="./assets/${coche.foto}" alt="${coche.marca} ${coche.modelo}" style="width:80px; border-radius:5px;"></td>
-                <td><button class="btn btn-primary" onclick="editarCoche(${coche.id})</td>
-                <td><button class="btn btn-primary" onclick="borrarCoche(${coche.id})</td>
+                <td><button class="btn btn-primary" onclick="editarCoche('${coche.matricula}')">Editar</button></td>
+                <td><button class="btn btn-primary" onclick="borrarCoche('${coche.matricula}')">Borrar</button></td>
             </tr>
         `;
         // Agregamos la fila al tbody
         tbody.innerHTML += fila;
     });
 }
+
+async function borrarCoche(matricula) {
+    if (!confirm(`¿Seguro que quieres eliminar el coche con matrícula ${matricula}?`)) return;
+
+    try {
+        // 🔹 Si tienes backend, enviamos la matrícula al servidor
+        let response = await fetch(`/api/coches/${matricula}`, 
+            { method: "DELETE" });
+
+        if (!response.ok) 
+            throw new Error("Error al eliminar el coche");
+
+        // 🔹 Eliminamos la fila del DOM
+        let fila = document.getElementById(`fila-${matricula}`);
+        if (fila) fila.remove();
+    } catch (error) {
+        console.error("Error al eliminar:", error);
+        alert("No se pudo eliminar el coche.");
+    }
+}
+
+
