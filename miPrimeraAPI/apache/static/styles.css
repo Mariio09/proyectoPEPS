@@ -182,3 +182,69 @@ img {
 .hidden{
     display: none;
 }
+
+
+/* 🔹 FORMULARIO PARA AÑADIR COCHE */
+.form-container {
+    width: 50%;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    color: black;
+    font-size: large;
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+input[type="file"] {
+    border: none;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#mensaje {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
