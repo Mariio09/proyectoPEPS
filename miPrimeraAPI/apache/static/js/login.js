@@ -1,4 +1,16 @@
 
+  window.onload = async function(){
+    token = window.localStorage.getItem('token');
+    if(token){
+      token = atob(token).split('-');
+      usuario = token[0];
+      perfil = token[1];
+
+      url = window.location.href.split('/')[2];
+      window.location.href = "http://"+ url + "/admin.html";
+    }
+  }
+
 async function login(){
     usuario = document.getElementById('user').value;
     pass = document.getElementById('pass').value;
@@ -20,7 +32,8 @@ async function login(){
             token64 = btoa(data.username + '-' + data.type);
             window.localStorage.setItem("token",token64);
         
-        window.location.href += "/admin.html";
+        url = window.location.href.split('/')[2];
+        window.location.href = "http://"+ url + "/admin.html";
        }else{
         document.getElementById('error').classList.remove('hidden');
        }

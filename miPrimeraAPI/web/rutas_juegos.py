@@ -13,8 +13,9 @@ def coches():
     coches,code= controlador_coches.obtener_coches()
     return json.dumps(coches, cls = Encoder),code
 
-@app.route("/coche/<id>",methods=["GET"])
+@app.route("/coches/<id>",methods=["GET"])
 def coche_por_id(id):
+    print(id)
     coche,code = controlador_coches.obtener_coche_por_id(id)
     return json.dumps(coche, cls = Encoder),code
 
@@ -23,7 +24,7 @@ def guardar_coche():
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
         coche_json = request.json
-        ret,code=controlador_coches.insertar_coche(int(coche_json["id"]), coche_json["matricula"], coche_json["marca"], coche_json["modelo"], coche_json["descripcion"], coche_json["precio"], coche_json["foto"])
+        ret,code=controlador_coches.insertar_coche(coche_json["matricula"], coche_json["marca"], coche_json["modelo"], coche_json["descripcion"], coche_json["precio"], coche_json["foto"])
     else:
         ret={"status":"Bad request"}
         code=401

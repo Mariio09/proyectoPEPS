@@ -2,12 +2,12 @@ from __future__ import print_function
 from bd import obtener_conexion
 import sys
 
-def insertar_coche(nombre, descripcion, precio,foto):
+def insertar_coche(matricula, marca, modelo,descripcion, precio,foto):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO coches(nombre, descripcion, precio,foto) VALUES (%s, %s, %s,%s)",
-                       (nombre, descripcion, precio,foto))
+            cursor.execute("INSERT INTO coches(matricula, marca, modelo, descripcion, precio, foto) VALUES (%s, %s, %s, %s, %s, %s)",
+                       (matricula, marca, modelo, descripcion, precio,foto))
             if cursor.rowcount == 1:
                 ret={"status": "OK" }
             else:
@@ -55,8 +55,7 @@ def obtener_coche_por_id(id):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            #cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM coches WHERE id = %s", (id,))
-            cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM coches WHERE id =" + id)
+            cursor.execute("SELECT * FROM coches WHERE id = %s", (id))
             coche = cursor.fetchone()
             if coche is not None:
                 cochejson = convertir_coche_a_json(coche)

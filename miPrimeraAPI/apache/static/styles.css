@@ -106,6 +106,7 @@ a{
 input[type=button]{
     font-family: "Rancho", serif;
     font-size: large;
+    width: 40%;
 }
 
 .bgMx{

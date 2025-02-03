@@ -29,15 +29,15 @@ function pintarCoches(lista) {
 
     lista.forEach(coche => {
         let fila = `
-            <tr id="fila-${coche.matricula}">
+            <tr id="fila-${coche.id}">
                 <td>${coche.matricula}</td>
                 <td>${coche.marca}</td>
                 <td>${coche.modelo}</td>
                 <td>${coche.descripcion}</td>
                 <td>${coche.precio}€</td>
                 <td><img src="./assets/${coche.foto}" alt="${coche.marca} ${coche.modelo}" style="width:80px; border-radius:5px;"></td>
-                <td><button class="btn btn-primary" onclick="editarCoche('${coche.matricula}')">Editar</button></td>
-                <td><button class="btn btn-primary" onclick="borrarCoche('${coche.matricula}')">Borrar</button></td>
+                <td><a href='/modificar.html?id=${coche.id}'>Editar</a></td>
+                <td><button class="btn btn-primary" onclick="borrarCoche('${coche.id}')">Borrar</button></td>
             </tr>
         `;
         // Agregamos la fila al tbody
@@ -45,19 +45,19 @@ function pintarCoches(lista) {
     });
 }
 
-async function borrarCoche(matricula) {
-    if (!confirm(`¿Seguro que quieres eliminar el coche con matrícula ${matricula}?`)) return;
+async function borrarCoche(id) {
+    if (!confirm(`¿Seguro que quieres eliminar el coche con matrícula ${id}?`)) return;
 
     try {
         // 🔹 Si tienes backend, enviamos la matrícula al servidor
-        let response = await fetch(`/api/coches/${matricula}`, 
+        let response = await fetch(`/api/coches/${id}`, 
             { method: "DELETE" });
 
         if (!response.ok) 
             throw new Error("Error al eliminar el coche");
 
         // 🔹 Eliminamos la fila del DOM
-        let fila = document.getElementById(`fila-${matricula}`);
+        let fila = document.getElementById(`fila-${id}`);
         if (fila) fila.remove();
     } catch (error) {
         console.error("Error al eliminar:", error);
