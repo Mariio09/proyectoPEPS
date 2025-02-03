@@ -3,6 +3,7 @@ import json
 import decimal
 from __main__ import app
 import controlador_coches
+import rutas_iva
 
 class Encoder(json.JSONEncoder):
     def default(self, obj):
@@ -11,6 +12,7 @@ class Encoder(json.JSONEncoder):
 @app.route("/coches",methods=["GET"])
 def coches():
     coches,code= controlador_coches.obtener_coches()
+    coches = rutas_iva.calcularlista(coches)
     return json.dumps(coches, cls = Encoder),code
 
 @app.route("/coches/<id>",methods=["GET"])
@@ -40,7 +42,7 @@ def actualizar_coche():
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
         coche_json = request.json
-        ret,code=controlador_coches.actualizar_coche(coche_json["id"],coche_json["nombre"], coche_json["descripcion"], float(coche_json["precio"]),coche_json["foto"])
+        ret,code=controlador_coches.actualizar_coche(coche_json["id"],coche_json["matricula"],coche_json["marca"], coche_json["modelo"],coche_json["descripcion"], float(coche_json["precio"]),coche_json["foto"])
     else:
         ret={"status":"Bad request"}
         code=401

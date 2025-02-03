@@ -85,12 +85,12 @@ def eliminar_coche(id):
         code=500
     return ret,code
 
-def actualizar_coche(id, nombre, descripcion, precio, foto):
+def actualizar_coche(id, matricula, marca, modelo, descripcion, precio, foto):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE coches SET nombre = %s, descripcion = %s, precio = %s, foto=%s WHERE id = %s",
-                       (nombre, descripcion, precio, foto,id))
+            cursor.execute("UPDATE coches SET matricula=%s,marca=%s,modelo=%s,descripcion=%s,precio=%s,foto=%s WHERE id=%s",
+                       (matricula, marca, modelo, descripcion, precio, foto,id))
             if cursor.rowcount == 1:
                 ret={"status": "OK" }
             else:

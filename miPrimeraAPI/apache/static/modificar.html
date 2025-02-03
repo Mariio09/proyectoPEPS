@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
-    <script src="./js/anadir.js" defer></script>
+    <script src="./js/modificar.js" defer></script>
     <title>Añadir Coche</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
         </a>
     </div>
 
-    <div class="form-container">
+    <div class="form-container" id="form-container">
         <h2>Modificar id: <span id="cocheId"></span></h2>
             <label for="matricula">Matrícula:</label>
             <input type="text" id="matricula" required>
@@ -37,8 +37,7 @@
             <label for="foto">Foto:</label>
             <input type="file" id="foto" accept="image/*">
 
-            <button onclick="anadir()">Añadir Coche</button>
-        <p id="mensaje"></p>
+            
     </div>
 
 </body>

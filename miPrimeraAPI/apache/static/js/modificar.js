@@ -1,7 +1,7 @@
 window.onload = async function() {
     try {
-        let lista = await getCoche();
-        pintarCoches(JSON.parse(lista));
+        let coche = await getCoche();
+        pintarCoche(JSON.parse(coche));
     } catch (error) {
         console.log("Error al obtener los coches:", error);
     }
@@ -20,7 +20,47 @@ async function getCoche(){
       headers: headersList
     });
     
-    let data = await response.text();
-    console.log(data);
+    return await response.text();
     
+}
+
+
+function pintarCoche(coche){
+    document.getElementById('form-container').innerHTML += "<button onclick='modificar("+coche.id+")'>Modificar</button>";
+    document.getElementById('matricula').value = coche.matricula;
+    document.getElementById('marca').value = coche.marca;
+    document.getElementById('descripcion').value = coche.descripcion;
+    document.getElementById('modelo').value = coche.modelo;
+    document.getElementById('precio').value = coche.precio;
+}
+
+async function modificar(id){
+
+    mat = document.getElementById('matricula').value;
+    marc = document.getElementById('marca').value;
+    desc = document.getElementById('descripcion').value;
+    modelo = document.getElementById('modelo').value;
+    precio = document.getElementById('precio').value;
+    foto = "";
+
+    let headersList = {
+        "Content-Type": "application/json"
+       }
+       
+       let bodyContent = JSON.stringify({"id":id,"matricula":mat,"marca":marc,"modelo":modelo,"descripcion":desc,"precio":precio,"foto":foto});
+       
+       let response = await fetch("/api/coches", { 
+         method: "PUT",
+         body: bodyContent,
+         headers: headersList
+       });
+       
+       let data = await response.text();
+       data = JSON.parse(data);
+
+       if(data.status == "OK"){
+        url = window.location.href.split('/')[2];
+        location.href = "http://"+url+"/admin.html";
+       }
+       
 }

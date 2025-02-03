@@ -3,7 +3,7 @@ window.onload = async function(){
     try {
       lista = await getCoches();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
     pintarCoches(JSON.parse(lista));
 }
@@ -26,6 +26,7 @@ async function getCoches(){
 
 function pintarCoches(lista){
   lista.forEach(coche => {
-    document.getElementById('containerCoches').innerHTML += "<div class='fotoCoche' ><img style='width:90%' src='./assets/"+ coche.foto+"' /><p>"+coche.marca+" "+coche.modelo+"</p></div>"
+    document.getElementById('containerCoches').innerHTML += "<div class='fotoCoche' ><div style='width:100%; background-image:url(./assets/"+coche.foto+"); background-repeat: no-repeat; background-size:contain; min-height:12em; background-position: center;'></div><div><p>"+coche.marca+" "+coche.modelo+"</p><p class='precio'>"+coche.precio+"€ - IVA*<span></span></p></div></div>"
+
   });
 }

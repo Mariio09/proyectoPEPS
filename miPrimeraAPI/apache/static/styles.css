@@ -249,3 +249,14 @@ button:hover {
     font-weight: bold;
     margin-top: 10px;
 }
+
+.precio{
+    font-size: large;
+}
+
+
+a{
+    text-decoration: none
+    ;
+}
+
