@@ -23,7 +23,7 @@ def guardar_coche():
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
         coche_json = request.json
-        ret,code=controlador_coches.insertar_coche(coche_json["nombre"], coche_json["descripcion"], float(coche_json["precio"]), coche_json["foto"])
+        ret,code=controlador_coches.insertar_coche(int(coche_json["id"]), coche_json["matricula"], coche_json["marca"], coche_json["modelo"], coche_json["descripcion"], coche_json["precio"], coche_json["foto"])
     else:
         ret={"status":"Bad request"}
         code=401
