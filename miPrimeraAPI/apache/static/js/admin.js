@@ -65,4 +65,8 @@ async function borrarCoche(id) {
     }
 }
 
+function logout() {
+    window.localStorage.removeItem("token");
+    window.location.href = "/login.html";
+}
 

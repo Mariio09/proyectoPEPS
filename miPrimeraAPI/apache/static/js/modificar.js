@@ -27,11 +27,13 @@ async function getCoche(){
 
 function pintarCoche(coche){
     document.getElementById('form-container').innerHTML += "<button onclick='modificar("+coche.id+")'>Modificar</button>";
+    document.getElementById('cocheId').innerHTML = coche.id;
     document.getElementById('matricula').value = coche.matricula;
     document.getElementById('marca').value = coche.marca;
     document.getElementById('descripcion').value = coche.descripcion;
     document.getElementById('modelo').value = coche.modelo;
     document.getElementById('precio').value = coche.precio;
+    document.getElementById('foto').value = coche.foto;
 }
 
 async function modificar(id){
@@ -41,7 +43,7 @@ async function modificar(id){
     desc = document.getElementById('descripcion').value;
     modelo = document.getElementById('modelo').value;
     precio = document.getElementById('precio').value;
-    foto = "";
+    foto = document.getElementById('foto').value;
 
     let headersList = {
         "Content-Type": "application/json"

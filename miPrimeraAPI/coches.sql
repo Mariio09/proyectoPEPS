@@ -17,12 +17,6 @@ CREATE TABLE usuarios(
     perfil VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Archivo (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    ruta VARCHAR(255) NOT NULL
-);
-
 INSERT INTO usuarios VALUES ('root', '1234', 'admin');
 INSERT INTO coches (`matricula`, `marca`, `modelo`, `descripcion`, `precio`, `foto`) VALUES
 ('1234ABC', 'Toyota', 'Corolla', 'Coche compacto y eficiente', 15000.00, 'toyota.jpg'),

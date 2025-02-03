@@ -43,7 +43,7 @@ def registro():
         juego_json = request.json
         username = juego_json['username']
         password = juego_json['password']
-        perfil = juego_json['profile']
+        perfil = "normal"
         try:
             conexion = obtener_conexion()
             with conexion.cursor() as cursor:

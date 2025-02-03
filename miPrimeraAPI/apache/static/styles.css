@@ -36,11 +36,12 @@ body{
 }
 
 .navegador nav ul {
-    width: 50%;
+    width: 90%;
     display: flex;
     list-style: none;
     justify-content: space-between;
     padding: 0;
+    flex-direction: row-reverse;
 }
 
 .navegador nav ul li{

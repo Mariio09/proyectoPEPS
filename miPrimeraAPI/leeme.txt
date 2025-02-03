@@ -1,5 +1,5 @@
 Antes de lanzar los contenedores hay que crear directorio mariadb_data
-Una vez lanzada cargar el archivo Juegos.sql en maridadb para que 
+Una vez lanzada cargar el archivo coches.sql en maridadb para que 
 la base de datos y la tabla de productos exista: 
    HAY QUE ACCEDER A http://localhost:9093
 

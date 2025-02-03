@@ -12,7 +12,7 @@ services:
       MARIADB_DATABASE: PEPS
     volumes:
       - ./mariadb_data:/var/lib/mysql
-      - ./Juegos.sql:/docker-entrypoint-initdb.d/Juegos.sql
+      - ./coches.sql:/docker-entrypoint-initdb.d/coches.sql
     user: mysql
     ports:
       - 3306:3306
@@ -30,7 +30,7 @@ services:
     container_name: apache
     build: ./apache
     ports:
-      - 9095:80
+      - 7777:80
 
   python:
     build: .
@@ -44,8 +44,6 @@ services:
       DB_PORT: 3306
       PORT: 8080
       HOST: 0.0.0.0
-    ports:
-      - 9094:8080
     depends_on:
         - mariadb
     
