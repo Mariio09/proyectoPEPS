@@ -13,6 +13,8 @@ import rutas_verfichero
 
 import rutas_juegos
 
+import rutas_iva
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT'))
     host = os.environ.get('HOST')
