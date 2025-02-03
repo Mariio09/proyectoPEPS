@@ -1,1 +1,1 @@
-alejandro tonto
+Para ejecutar entrar dentro de la carpeta miPrimeraAPI y hacer docker compose up --build
