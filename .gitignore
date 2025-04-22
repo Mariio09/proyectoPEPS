@@ -1,1 +1,3 @@
-miPrimeraAPI/mariadb_data/*
+api/mariadb_data/*
+api/logwaf/*
+api/apache/*

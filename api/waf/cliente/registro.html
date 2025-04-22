@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+    <script src="./js/login.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="containerTitulo">
+        <a href="./index.html"><h1 class="titulo rancho"><span class="verde">Los </span><span class="blanco">Carros </span><span class="rojo">S.L.</span></h1></a>
+    </div>
+
+    <div class="containerLogin">
+        <div class="containerForm">
+
+            <div>
+                <label for="user">Usuario *</label>
+                <input type="text" id="user" required>
+            </div>
+
+            <div>
+                <label for="pass">Clave *</label>
+                <input type="password" id="pass" required>
+            </div>
+
+            <input type="button" onclick="registro()" value="Ingresar">
+            <span class="hidden" id="errormsg1">No es posible realizar el registro</span>
+            <span class="hidden" id="errormsg">Rellena todos los datos Obligatorios (*)</span>
+            <a href="/login.html">Iniciar sesion</a>
+        </div>
+    </div>
+</body>
+</html>
