@@ -1,5 +1,5 @@
 import unittest
-from miPrimeraAPI.web.CalcIva import calcIva
+from CalcIva import calcIva
 
 class PruebaCalcularIVA(unittest.TestCase):
 
